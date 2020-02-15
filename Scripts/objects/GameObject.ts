@@ -116,7 +116,7 @@ module objects
          * @param {boolean} [centered=false]
          * @memberof GameObject
          */
-        constructor(imagePath:string = "./Assets/images/placeholder.png",
+        constructor(imagePath:Object = config.Game.ASSETS.getResult("placeholder"),
                     x:number = 0, y:number = 0, centered:boolean = false)
         {
             super(imagePath);
@@ -125,14 +125,13 @@ module objects
             //this.position = new Vector2(x, y);
 
             // wait for the  image to load before calculating its width and height
-            this.image.addEventListener('load', ()=>{
+            //this.image.addEventListener('load', ()=>{
                 this.width = this.getBounds().width;
                 this.height = this.getBounds().height;
                 this.halfWidth = this.width * 0.5;
                 this.halfHeight = this.height * 0.5;
-
                 this.isCentered = centered;
-            });
+            //});
 
             // set the GameObject's position
             this.position = new Vector2(x, y);

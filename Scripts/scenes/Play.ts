@@ -3,8 +3,9 @@ module scenes
     export class Play extends objects.Scene
     {
         // PRIVATE INSTANCE MEMBERS
-        playLabel:objects.Label;
-        nextButton:objects.Button;
+        private playLabel:objects.Label;
+        private nextButton:objects.Button;
+        private  _ocean:objects.Ocean;
 
         // PUBLIC PROPERTIES
 
@@ -16,6 +17,7 @@ module scenes
             // initialization
             this.playLabel = new objects.Label();
             this.nextButton = new objects.Button();
+            this._ocean = new objects.Ocean();
 
             this.Start();
         }
@@ -24,18 +26,20 @@ module scenes
 
         public Start(): void 
         {
-            this.playLabel = new objects.Label("Place Scene", "80px","Consolas", "#000000", 320, 200, true);
-            this.nextButton = new objects.Button("./Assets/images/nextButton.png", 320, 400, true);
+            this.playLabel = new objects.Label("Place Scene", "80px","Consolas", "#FFFF00", 320, 200, true);
+            this.nextButton = new objects.Button(config.Game.ASSETS.getResult("nextButton"), 320, 400, true);
+            this._ocean = new objects.Ocean();
            
             this.Main();
         }        
         
         public Update(): void 
         {
-            
+            this._ocean.Update();
         }
         
         public Main(): void {
+            this.addChild(this._ocean);
             
             this.addChild(this.playLabel);
     

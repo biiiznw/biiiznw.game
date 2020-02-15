@@ -22,22 +22,25 @@ var scenes;
             var _this = _super.call(this) || this;
             // initialization
             _this.endLabel = new objects.Label();
-            _this.nextButton = new objects.Button();
+            _this._backButton = new objects.Button();
+            _this._ocean = new objects.Ocean();
             _this.Start();
             return _this;
         }
         // PUBLIC METHODS
         End.prototype.Start = function () {
-            this.endLabel = new objects.Label("End Scene", "80px", "Consolas", "#000000", 320, 200, true);
-            this.nextButton = new objects.Button("./Assets/images/backButton.png", 320, 400, true);
+            this.endLabel = new objects.Label("End Scene", "80px", "Consolas", "#FFFF00", 320, 200, true);
+            this._backButton = new objects.Button(config.Game.ASSETS.getResult("backButton"), 320, 400, true);
             this.Main();
         };
         End.prototype.Update = function () {
+            this._ocean.Update();
         };
         End.prototype.Main = function () {
+            this.addChild(this._ocean);
             this.addChild(this.endLabel);
-            this.addChild(this.nextButton);
-            this.nextButton.on("click", function () {
+            this.addChild(this._backButton);
+            this._backButton.on("click", function () {
                 config.Game.SCENE_STATE = scenes.State.PLAY;
             });
         };

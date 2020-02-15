@@ -23,18 +23,22 @@ var scenes;
             // initialization
             _this.playLabel = new objects.Label();
             _this.nextButton = new objects.Button();
+            _this._ocean = new objects.Ocean();
             _this.Start();
             return _this;
         }
         // PUBLIC METHODS
         Play.prototype.Start = function () {
-            this.playLabel = new objects.Label("Place Scene", "80px", "Consolas", "#000000", 320, 200, true);
-            this.nextButton = new objects.Button("./Assets/images/nextButton.png", 320, 400, true);
+            this.playLabel = new objects.Label("Place Scene", "80px", "Consolas", "#FFFF00", 320, 200, true);
+            this.nextButton = new objects.Button(config.Game.ASSETS.getResult("nextButton"), 320, 400, true);
+            this._ocean = new objects.Ocean();
             this.Main();
         };
         Play.prototype.Update = function () {
+            this._ocean.Update();
         };
         Play.prototype.Main = function () {
+            this.addChild(this._ocean);
             this.addChild(this.playLabel);
             this.addChild(this.nextButton);
             this.nextButton.on("click", function () {

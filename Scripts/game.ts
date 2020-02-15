@@ -5,7 +5,25 @@ let game = (function(){
     let stage:createjs.Stage;
 
     let currentSceneState: scenes.State;
-    let currentScene: objects.Scene;   
+    let currentScene: objects.Scene; 
+    let assets: createjs.LoadQueue;  
+    let assetManifast = [
+        {id: "placeholder", src: "./Assets/images/placeholder.png"},
+        {id: "startButton", src: "./Assets/images/startButton.png"},
+        {id: "nextButton", src: "./Assets/images/nextButton.png"},
+        {id: "backButton", src: "./Assets/images/backButton.png"},
+        {id: "ocean", src: "./Assets/images/ocean.gif"}
+    ];
+
+    function Preload():void
+    {
+        assets = new createjs.LoadQueue();
+        config.Game.ASSETS = assets; // create a global reference
+        assets.installPlugin(createjs.Sound);
+        assets.loadManifest(assetManifast);
+
+        assets.on("complete", Start);
+    }
 
     /**
      * Perform Initialization in the Start function
@@ -77,6 +95,6 @@ let game = (function(){
 
     }
 
-    window.addEventListener("load", Start);
+    window.addEventListener("load", Preload);
 
 })();
